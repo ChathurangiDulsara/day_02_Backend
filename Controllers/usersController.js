@@ -62,3 +62,16 @@ export function loginUser(req, res) {
         }
     );
 }
+
+
+export function userDelete(req,res){
+    User.deleteOne({email:req.body.email}).then(
+        ()=>{
+            res.json({
+                message:"User Deleted Successfully"
+            })
+        }
+    )
+
+}
+
