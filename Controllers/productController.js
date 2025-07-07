@@ -3,12 +3,14 @@ import product from "../models/product.js"
 
 
 export async function getProduct(req,res){
-        const productList = await product.find()
+        
         try{
-        res.json({
+
+           const productList = await product.find()
+           res.json({
             list:productList
         })
-    }catch{
+       }catch{
         res.json({
             message:"Error"
     })
