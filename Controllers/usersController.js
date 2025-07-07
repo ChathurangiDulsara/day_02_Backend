@@ -103,3 +103,18 @@ export function isCustomer(req, res) {
     }
 
 
+export async function getUser(req,res){
+    try{
+
+           const UsersList = await User.find()
+           res.json({
+            list:UsersList
+        })
+       }catch{
+        res.json({
+            message:"Error"
+    })
+}
+        
+
+}
