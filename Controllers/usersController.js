@@ -78,23 +78,16 @@ export function userDelete(req,res){
 }
 
 export function isAdmin(req, res) {
-    if(req.type == "admin"){
         if(req.user == null){
-            res.json({
-                message:"You are not logged in"
-            })
-        return true
+            return false
 
         }
 
         if(req.user.type != "admin"){
-            res.json({
-                message:"Please login as administrator to create admin account"
-            })
-            return false
+            return false 
         }
+        return true
     }
 
 
-}
 

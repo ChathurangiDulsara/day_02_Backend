@@ -58,24 +58,7 @@ export function createProduct(req,res){
 
     }
     
-    // console.log(req.user)
-
-    // if(req.user==null){
-
-    //     res.json({
-    //         message:"you are not logged in"
-    //     })
-    //     return
-    // }
-
-    // if(req.user.type!="admin"){
-    //     res.json({
-    //         message:"You are not an admin"
-    //     })
-    //     return
-    // }
-      
-        const newProduct = new product(req.body)
+         const newProduct = new product(req.body)
 
         newProduct.save().then(
         ()=> {
@@ -103,4 +86,17 @@ export function createProduct(req,res){
     ) 
 
  }
+
+ export function isAdmin(user){
+    if(user == null){
+        return false
+    }
+
+    if(user.type != "admin"){
+        return false
+    }
+    
+    
+    return true
+}
         
