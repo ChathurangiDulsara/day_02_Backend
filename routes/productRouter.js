@@ -9,18 +9,6 @@ productRouter.post("/",createProduct);
 productRouter.delete("/:name",deleteProduct)
 
 
-/**studentRouter.post("/",
-    (req,res)=>{
-
-        console.log("post request is received")
-        res.json({
-            message:"post request is received"
-        })
-
-    }
-        );
-**/
-
 
 export default productRouter;
 

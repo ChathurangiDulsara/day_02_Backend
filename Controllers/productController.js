@@ -50,17 +50,16 @@ export function getProductByName(req,res){
 
 export function createProduct(req,res){
 
-    if(!isAdmin(req.user)){
+    if(isAdmin(req)){
         res.json({
-            message:"Please login as administrator to Create admin accounts"
+            message:"Please login as administrator to add admin accounts"
         })
         return
 
-    }
-    
-         const newProduct = new product(req.body)
+    } 
+    const newProduct = new product(req.body)
 
-        newProduct.save().then(
+    newProduct.save().then(
         ()=> {
             res.json({
                 message:"Product Created"
@@ -71,7 +70,7 @@ export function createProduct(req,res){
         ).catch(
             (error)=>{
                 res.json({
-                    message:"Error"
+                    message:error
                 }
             )}
         )

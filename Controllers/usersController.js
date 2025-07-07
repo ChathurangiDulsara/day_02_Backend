@@ -84,10 +84,22 @@ export function isAdmin(req, res) {
         }
 
         if(req.user.type != "admin"){
-            return false 
+            return true 
         }
-        return true
+        
     }
 
+export function isCustomer(req, res) {
+        if(req.user == null){
+            return false
+        }
+
+        if(req.user.type != "customer"){
+            return false
+        }
+
+        return true
+        
+    }
 
 
