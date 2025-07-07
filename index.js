@@ -50,6 +50,7 @@ app.use(
 
 app.use("/api/products",productRouter)
 app.use("/api/users", userRouter)
+app.use("/api/orders", orderRouter);
 
 
 app.listen(5000,
