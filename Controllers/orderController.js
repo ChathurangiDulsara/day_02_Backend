@@ -2,19 +2,17 @@ import Order from "../models/Order.js";
 import { isCustomer } from "./usersController.js";
 
 export async function createOrder(req, res) {
-
-
-    isCustomer(req, res);
-    if (!req.user) {
-        return res.status(401).json({
-            message: "Unauthorized"
-        });
-    }
+    if (!isCustomer(req, res)) {
+        res.json({
+            message:"Please login as customer to create Orders"
+        })
+            
+        }
     //cbc001
     //take the latest productId
     const order = new Order(req.body);
     try {
-        const latestOrder = await order.find().sort({date: -1}).limit(1)//output an array an limit to one;
+        const latestOrder = await Order.find().sort({date: -1}).limit(1)//output an array an limit to one;
         let orderId;
 
         if (latestOrder.length == 0) {
