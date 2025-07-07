@@ -8,23 +8,6 @@ export function createUser(req, res) {
     // 1. Get the user data from the request body
     const userData = req.body;
 
-    if(userData.type == "admin"){
-        if(req.user == null){
-            res.json({
-                message:"Please login as administrator to Create admin accounts"
-            })
-        return
-
-        }
-
-        if(req.user.type != "admin"){
-            res.json({
-                message:"Please login as administrator to create admin account"
-            })
-            return
-        }
-    }
-
     // 2. Hash the password
     userData.password = bcrypt.hashSync(userData.password, 10);
 
@@ -94,13 +77,13 @@ export function userDelete(req,res){
 
 }
 
-export function isAdmin(req,res){
+export function isAdmin(req, res) {
     if(req.type == "admin"){
         if(req.user == null){
             res.json({
-                message:"Please login as administrator to Create admin accounts"
+                message:"You are not logged in"
             })
-        return
+        return true
 
         }
 
@@ -108,7 +91,7 @@ export function isAdmin(req,res){
             res.json({
                 message:"Please login as administrator to create admin account"
             })
-            return
+            return false
         }
     }
 

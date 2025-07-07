@@ -50,22 +50,30 @@ export function getProductByName(req,res){
 
 export function createProduct(req,res){
 
-    console.log(req.user)
-
-    if(req.user==null){
-
+    if(!isAdmin(req.user)){
         res.json({
-            message:"you are not logged in"
+            message:"Please login as administrator to Create admin accounts"
         })
         return
-    }
 
-    if(req.user.type!="admin"){
-        res.json({
-            message:"You are not an admin"
-        })
-        return
     }
+    
+    // console.log(req.user)
+
+    // if(req.user==null){
+
+    //     res.json({
+    //         message:"you are not logged in"
+    //     })
+    //     return
+    // }
+
+    // if(req.user.type!="admin"){
+    //     res.json({
+    //         message:"You are not an admin"
+    //     })
+    //     return
+    // }
       
         const newProduct = new product(req.body)
 
