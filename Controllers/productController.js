@@ -1,7 +1,5 @@
 import product from "../models/product.js"
 
-
-
 export async function getProduct(req,res){
         
         try{
@@ -15,10 +13,7 @@ export async function getProduct(req,res){
             message:"Error"
     })
 }
-        //     (productList)=>{
-        //        res.json({
-        //         list:productList 
-        //     })
+        
 }
 
 export function getProductByName(req,res){

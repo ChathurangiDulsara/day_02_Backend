@@ -31,9 +31,7 @@ app.use(bodyParser.json())
 
 app.use(
     (req,res,next)=>{
-        // console.log(req)
-        // console.log(req.header)
-
+    
         const token = req.header("Authorization")?.replace("Bearer ", "")
         console.log(token)
 
@@ -52,53 +50,6 @@ app.use(
 
 app.use("/api/products",productRouter)
 app.use("/api/users", userRouter)
-
-/**app.get("/",
-    (req,res)=>{
-        console.log(req.body)
-        console.log("Get request is received")
-
-        let prefix="Mr"
-
-        if(req.body.gender=="female"){
-            prefix="Ms";
-        }
-
-        res.json({
-            message:"Hello  "+ prefix+" "+req.body.name
-
-        })
-    });
-
-
-app.post("/",
-    (req,res)=>{
-      
-        const newStudent = new student(req.body)
-
-        newStudent.save().then(
-        ()=> {
-            res.json({
-                message:"Student Created"
-            })
-        }
-
-        
-        ).catch(
-            (error)=>{
-                res.json({
-                    message:"Error"
-                }
-            )}
-        )
-    });
-
-app.delete("/",
-    ()=>{
-        console.log("Delete request is Received")
-
-    }
-);  **/
 
 
 app.listen(5000,
