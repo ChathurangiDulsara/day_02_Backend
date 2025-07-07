@@ -38,7 +38,7 @@ app.use(
         console.log(token)
 
         if(token!= null){
-            jwt.verify(token,proces.env.SECRET,(error,decoded)=>{
+            jwt.verify(token,proces.env.SECREY,(error,decoded)=>{
                 if(!error){
                     req.user = decoded 
                 }
