@@ -15,15 +15,15 @@ export async function createOrder(req, res) {
         let orderId;
 
         if (latestOrder.length == 0) {
-            orderId = "CBC001"; // If no orders exist, start with cbc001
+            orderId = "CBC0001"; // If no orders exist, start with cbc001
         } else {
             // Extract the last orderId and increment it 
             const currentOrdeId = latestOrder[0].orderId;
             const numberString = currentOrdeId.replace("CBC", "");
             const newNumber= parseInt(numberString);// Convert to number
             
-            orderId = "CBC" + String(numberString + 1).toString().padStart(4, '0'); // Increment and format to 4 digits  
-            orderId = "CBC" +newNumber;
+            orderId = "CBC" + String(newNumber + 1).toString().padStart(4, '0'); // Increment and format to 4 digits  
+        
         }
         const newOrder = req.body;  
         newOrder.orderId = orderId; // Assign the new orderId
