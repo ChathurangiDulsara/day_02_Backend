@@ -6,11 +6,10 @@ export async function createOrder(req, res) {
         res.json({
             message:"Please login as customer to create Orders"
         })
-            
-        }
+    }
     //cbc001
     //take the latest productId
-    const order = new Order(req.body);
+
     try {
         const latestOrder = await Order.find().sort({date: -1}).limit(1)//output an array an limit to one;
         let orderId;
@@ -32,6 +31,10 @@ export async function createOrder(req, res) {
 
         const order = new Order(newOrder);
         await order.save();
+
+        res.status(201).json({
+        message: "Order created successfully"
+        });
 
     
      }catch (error) {
