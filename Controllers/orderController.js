@@ -22,7 +22,7 @@ export async function createOrder(req, res) {
             const numberString = currentOrdeId.replace("CBC", "");
             const newNumber= parseInt(numberString);// Convert to number
             
-            orderId = "CBC" + String(number + 1).toString().padStart(4, '0'); // Increment and format to 4 digits  
+            orderId = "CBC" + String(numberString + 1).toString().padStart(4, '0'); // Increment and format to 4 digits  
             orderId = "CBC" +newNumber;
         }
         const newOrder = req.body;  

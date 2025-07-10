@@ -84,8 +84,9 @@ export function isAdmin(req, res) {
         }
 
         if(req.user.type != "admin"){
-            return true 
+            return false 
         }
+        return true
         
     }
 
