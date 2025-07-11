@@ -71,8 +71,6 @@ export async function createOrder(req, res) {
             }
         }
 
-        
-
 
         newOrder.orderId = orderId; // Assign the new orderId
         newOrder.email = req.user.email;
