@@ -52,6 +52,25 @@ export async function createOrder(req, res) {
 
         }
 
+        for(let y=0; y < newProductArray.length; y++) {
+            if (newProductArray[y].quantity <= 0) {
+                return res.status(400).json({
+                    message: "Quantity must be greater than zero for product " + newProductArray[y].productID
+                });
+            }
+        }
+
+        for(let a=0; a<newProductArray.length; a++){
+            const product1 = await product.findOne({
+                productID: newProductArray[a].productID
+            })
+            if(product1.stock < newProductArray[a].quantity){
+                return res.status(400).json({
+                    message: "Insufficient stock for product " + newProductArray[a].productID
+                });
+            }
+        }
+
         
 
 
