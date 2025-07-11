@@ -13,11 +13,6 @@ const app= express();
 
 const mongoUrl= process.env.MONGO_DB_URL;
 
-mongoose.connect(mongoUrl, {
-  useNewUrlParser: true,
- useUnifiedTopology: true
-});
-
 const connection= mongoose.connect(mongoUrl)
 
 mongoose.connection.once("open",()=>{
@@ -40,11 +35,11 @@ app.use(
             jwt.verify(token,process.env.SECRET,(error,decoded)=>{
                 if(!error){
                     req.user = decoded 
+                    console.log("User authenticated:", req.user);
+
                 }
             })
-        }
-                
-            next()
+        }next()
     }  
     
 )

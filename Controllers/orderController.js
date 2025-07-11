@@ -1,4 +1,5 @@
 import Order from "../models/Order.js";
+import Product from "../models/product.js";
 import { isCustomer } from "./usersController.js";
 
 export async function createOrder(req, res) {
@@ -26,6 +27,22 @@ export async function createOrder(req, res) {
         
         }
         const newOrder = req.body;  
+
+        const newProductArray =[]
+        for(let i=0;i<newOrder.orderedItems.length; i++){
+            const product = await Product.findOne({
+                productId: newOrder.orderedItems[i].productId
+            })
+            console.log(product)
+            if(product ==null){
+                return res.status(404).json({
+                    message: "Product with ID" +newOrder.orderedItems[i].productId + "not found"
+                });
+            }
+
+        }
+
+
         newOrder.orderId = orderId; // Assign the new orderId
         newOrder.email = req.user.email;
 
