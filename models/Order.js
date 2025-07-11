@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import product from "./product.js";
 
 const orderSchema = mongoose.Schema({
     orderId:{
@@ -9,6 +10,10 @@ const orderSchema = mongoose.Schema({
     orderedItems:[
         {
             productName:{
+                type:String,
+                required:true
+            },
+            productId:{
                 type:String,
                 required:true
             },
