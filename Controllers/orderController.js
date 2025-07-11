@@ -1,5 +1,5 @@
 import Order from "../models/Order.js";
-import Product from "../models/product.js";
+import product from "../models/product.js";
 import { isCustomer } from "./usersController.js";
 
 export async function createOrder(req, res) {
@@ -30,17 +30,29 @@ export async function createOrder(req, res) {
 
         const newProductArray =[]
         for(let i=0;i<newOrder.orderedItems.length; i++){
-            const product = await Product.findOne({
-                productId: newOrder.orderedItems[i].productId
+            const product1 = await product.findOne({
+                productID: newOrder.orderedItems[i].productID
             })
-            console.log(product)
-            if(product ==null){
+            console.log(product1)
+            if(product1 ==null){
                 return res.status(404).json({
-                    message: "Product with ID" +newOrder.orderedItems[i].productId + "not found"
+                    message: "Product with " +newOrder.orderedItems[i].productID + " id not found"
                 });
             }
 
+            newProductArray[i]={
+                name:product1.ProductName,
+                productID: product1.productID,
+                price: product1.price,  
+                quantity: newOrder.orderedItems[i].quantity,
+                image:product1.image// Assuming you want the first image   
+
+
+            }
+
         }
+
+        
 
 
         newOrder.orderId = orderId; // Assign the new orderId

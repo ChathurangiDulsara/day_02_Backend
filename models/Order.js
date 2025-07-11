@@ -10,24 +10,21 @@ const orderSchema = mongoose.Schema({
     orderedItems:[
         {
             productName:{
-                type:String,
-                required:true
+                type:String
             },
-            productId:{
+            productID:{
                 type:String,
                 required:true
             },
             price:{
-                type:Number,
-                required:true
+                type:Number
             },
             quantity:{
                 type:Number,
                 required:true
             },
             image:{
-                type:String,
-                required:true
+                type:String
             }
         }
     ],
