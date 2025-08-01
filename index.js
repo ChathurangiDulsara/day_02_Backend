@@ -5,17 +5,14 @@ import productRouter from "./routes/productRouter.js";
 import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import jwt, { decode } from "jsonwebtoken";
-import dotenv from "dotenv";
 import cors from "cors";
-import { app } from "../cbc-backend-master/cbc-backend-master/index.js";
+import dotenv from "dotenv";
 dotenv.config()
 
 const app= express();
  
 
 const mongoUrl= process.env.MONGO_DB_URL;
-
-app.use(cors())
 
 const connection= mongoose.connect(mongoUrl)
 
@@ -26,6 +23,8 @@ mongoose.connection.once("open",()=>{
 mongoose.connection.on("error", (err) => {
   console.error("Database connection error:", err);
 });
+
+app.use(cors())       
 
 app.use(bodyParser.json())
 
@@ -47,7 +46,6 @@ app.use(
     }  
     
 )
-
 app.use("/api/products",productRouter)
 app.use("/api/users", userRouter)
 app.use("/api/orders", orderRouter);
