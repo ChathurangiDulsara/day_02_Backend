@@ -90,3 +90,103 @@ export async function createOrder(req, res) {
         });
     }
 }
+
+export async function getQuote(req, res) {
+  
+  try {
+    const newOrderData = req.body;
+
+    const newProductArray = [];
+
+    let total = 0;
+    let labeledTotal = 0;
+    console.log(req.body)
+
+    for (let i = 0; i < newOrderData.orderedItems.length; i++) {
+      const product = await Product.findOne({
+        productID: newOrderData.orderedItems[i].productID,
+      });
+
+      if (product == null) {
+        res.json({
+          message:
+            "Product with id " +
+            newOrderData.orderedItems[i].productID +
+            " not found",
+        });
+        return;
+      }
+      labeledTotal += product.price * newOrderData.orderedItems[i].quantity;
+      total += product.LastPrice * newOrderData.orderedItems[i].quantity;
+      newProductArray[i] = {
+        name: product.productName,
+        price: product.LastPrice,
+        labeledPrice: product.price,
+        quantity: newOrderData.orderedItems[i].quantity,
+        image: product.images[0],
+      };
+    }
+    console.log(newProductArray);
+    newOrderData.orderedItems = newProductArray;
+    newOrderData.total = total;
+
+    res.json({
+      orderedItems: newProductArray,
+      total: total,
+      labeledTotal: labeledTotal,
+    });
+   
+
+
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+export async function updateOrder(req, res) {
+  if (!isAdmin(req)) {
+    res.json({
+      message: "Please login as admin to update orders",
+    });
+  }
+  
+  try {
+    const orderId = req.params.orderId;
+
+    const order = await Order.findOne({
+      orderId: orderId,
+    });
+
+    if (order == null) {
+      res.status(404).json({
+        message: "Order not found",
+      })
+      return;
+    }
+
+    const notes = req.body.notes;
+    const status = req.body.status;
+
+    const updateOrder = await Order.findOneAndUpdate(
+      { orderId: orderId },
+      { notes: notes, status: status }
+    );
+
+    res.json({
+      message: "Order updated",
+      updateOrder: updateOrder
+    });
+
+  }catch(error){
+
+    
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+}
+
+
+
