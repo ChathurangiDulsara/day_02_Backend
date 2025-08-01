@@ -1,6 +1,5 @@
 import mongoose from "mongoose"
   
-  
   const productSchema  = mongoose.Schema({
     productID:{
       type:String,
