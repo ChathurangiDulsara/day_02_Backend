@@ -45,6 +45,6 @@ import mongoose from "mongoose"
   })
            
 
-const product = mongoose.model("product",productSchema)
+const Product = mongoose.model("product",productSchema)
 
-export default product;
+export default Product;
