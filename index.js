@@ -6,6 +6,8 @@ import userRouter from "./routes/userRouter.js";
 import orderRouter from "./routes/orderRouter.js";
 import jwt, { decode } from "jsonwebtoken";
 import dotenv from "dotenv";
+import cors from "cors";
+import { app } from "../cbc-backend-master/cbc-backend-master/index.js";
 dotenv.config()
 
 const app= express();
