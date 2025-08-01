@@ -1,9 +1,14 @@
 import express from "express";
-import { createOrder, getQuote } from "../Controllers/orderController.js"; 
+import { createOrder, getOrders, getOrdersById, getQuotation, updateOrder } from "../Controllers/orderController.js"; 
 const orderRouter = express.Router();
 
-// orderRouter.get("/", getOrders);
-orderRouter.post("/", createOrder); 
-orderRouter.post("/quote",getQuote) 
+
+orderRouter.post("/quote",getQuotation);
+orderRouter.get("/", getOrders);
+orderRouter.post("/", createOrder);
+orderRouter.get("/:orderId",getOrdersById);
+orderRouter.put("/:id",updateOrder);
+
+
 
 export default orderRouter;
