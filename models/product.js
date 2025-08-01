@@ -14,7 +14,7 @@ import mongoose from "mongoose"
     altNames:[
       {
         type:String,
-        required:true
+        default:[]
       }
     ],
 
