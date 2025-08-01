@@ -13,6 +13,8 @@ const app= express();
 
 const mongoUrl= process.env.MONGO_DB_URL;
 
+app.use(cors())
+
 const connection= mongoose.connect(mongoUrl)
 
 mongoose.connection.once("open",()=>{
