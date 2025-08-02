@@ -6,7 +6,7 @@ import mongoose from "mongoose"
       required:true,  
       unique:true
     },
-    ProductName :{
+    ProductName:{
       type:String,
       required:true
     },
